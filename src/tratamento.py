@@ -18,7 +18,7 @@ df_limpo = df_limpo.dropna()
 #Criar pasta de destino se não existir
 os.makedirs('data/processed', exist_ok=True)
 
-#Exportar base tratada para o Streamlit/Ryan
+#Exportar base tratada para o Streamlit
 df_limpo.to_csv(caminho_processado, index=False)
 
 print(f'Sucesso! Base tratada salva em: {caminho_processado}')
