@@ -1,0 +1,9 @@
+fonte_origem,data_ocorrencia,horario,bairro,municipio,tipo_violencia,nivel_risco
+Sinesp,2026-09-10,21:30,Umarizal,Belém,Agressão Física,Alto
+DataJud,2026-09-12,18:45,Marco,Belém,Assédio,Médio
+DataSenado,2026-09-15,08:15,Pedreira,Belém,Ameaça,Baixo
+SIM,2026-09-18,23:10,Guamá,Belém,Violência de Gênero,Alto
+SINAN,2026-09-20,14:20,Nazaré,Belém,Assédio Verbal,Médio
+Sinesp,2026-09-22,22:00,Umarizal,Belém,Ameaça,Alto
+DataJud,2026-09-25,19:00,Cremação,Belém,Agressão Física,Alto
+Sinesp,2026-09-28,10:00,Marco,Belém,Assédio,Baixo
