@@ -1,0 +1,44 @@
+{
+    "Guamá": {
+        "texto": "Alto",
+        "cor": "#c92a2a",
+        "bg": "#fdf0f4",
+        "faixa_horario": "18h00 - 23h59",
+        "tipo_registro": "Violência Física e Intrafamiliar"
+    },
+    "Bengui": {
+        "texto": "Baixo",
+        "cor": "#10b981",
+        "bg": "#d1fae5",
+        "faixa_horario": "00h00 - 05h59",
+        "tipo_registro": "Violência Sexual"
+    },
+    "Cabanagem": {
+        "texto": "Médio",
+        "cor": "#d97706",
+        "bg": "#fef3c7",
+        "faixa_horario": "20h00 - 02h00",
+        "tipo_registro": "Feminicídio e Lesão Corporal"
+    },
+    "Campina / Comercio": {
+        "texto": "Baixo",
+        "cor": "#10b981",
+        "bg": "#d1fae5",
+        "faixa_horario": "12h00 - 17h59",
+        "tipo_registro": "Ameaça e Importunação"
+    },
+    "Marco / São Brás": {
+        "texto": "Alto",
+        "cor": "#c92a2a",
+        "bg": "#fdf0f4",
+        "faixa_horario": "08h00 - 17h59",
+        "tipo_registro": "Ações de Medida Protetiva de Urgência"
+    },
+    "Terra Firme (Montese)": {
+        "texto": "Baixo",
+        "cor": "#10b981",
+        "bg": "#d1fae5",
+        "faixa_horario": "22h00 - 05h59",
+        "tipo_registro": "Óbitos por Agressão (CID-10 X85-Y09)"
+    }
+}
