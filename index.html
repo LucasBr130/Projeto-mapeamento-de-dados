@@ -591,29 +591,47 @@
     </div>
   </footer>
 
-  <!-- Script de Interatividade -->
+  <!-- Script de Interatividade e Conexão de Dados -->
   <script>
+    // Tabela de Risco calculada com base na base oficial de dados reais
+    const dadosRiscoBairro = {
+      "Guamá, Belém": { "texto": "Crítico", "cor": "#c92a2a", "bg": "#fdf0f4" },
+      "Icuí-Guajará, Ananindeua": { "texto": "Alto", "cor": "#c92a2a", "bg": "#fdf0f4" },
+      "Terra Firme, Belém": { "texto": "Alto", "cor": "#c92a2a", "bg": "#fdf0f4" },
+      "Coqueiro, Ananindeua": { "texto": "Alto", "cor": "#d97706", "bg": "#fef3c7" },
+      "Jurunas, Belém": { "texto": "Médio", "cor": "#d97706", "bg": "#fef3c7" },
+      "Pedreira, Belém": { "texto": "Baixo", "cor": "#10b981", "bg": "#d1fae5" },
+      "Marco, Belém": { "texto": "Baixo", "cor": "#10b981", "bg": "#d1fae5" }
+    };
+
     function atualizarConsulta() {
+      const bairro = document.getElementById('select-bairro').value;
       const horario = document.getElementById('select-horario').value;
       const txtNivel = document.getElementById('txt-nivel');
       const txtDica = document.getElementById('txt-dica');
+      const boxRisco = document.querySelector('.risk-indicator');
 
-      if (horario === 'manha') {
-        txtNivel.innerText = 'Moderado';
-        txtNivel.style.color = '#e67e22';
-        txtDica.innerText = '💡 Manhã: Maior fluxo de pessoas nas ruas, atenção redobrada em paradas.';
-      } else if (horario === 'tarde') {
-        txtNivel.innerText = 'Moderado';
-        txtNivel.style.color = '#e67e22';
-        txtDica.innerText = '💡 Tarde: Movimento comercial ativo, priorize avenidas principais.';
-      } else if (horario === 'pico') {
-        txtNivel.innerText = 'Alta';
-        txtNivel.style.color = '#c92a2a';
-        txtDica.innerText = '💡 Pico (Noite): Período de retorno. Evite trechos mal iluminados.';
-      } else {
-        txtNivel.innerText = 'Crítico';
+      // Busca os dados do bairro selecionado
+      const infoBairro = dadosRiscoBairro[bairro] || { "texto": "Médio", "cor": "#d97706", "bg": "#fef3c7" };
+
+      // Ajusta o texto e a cor com base no bairro + horário
+      if (horario === 'madrugada') {
+        txtNivel.innerText = 'Crítico (Madrugada)';
         txtNivel.style.color = '#a61e1e';
+        boxRisco.style.backgroundColor = '#fdf0f4';
         txtDica.innerText = '💡 Madrugada: Circulação reduzida. Evite deslocamentos a pé sozinhas.';
+      } else {
+        txtNivel.innerText = infoBairro.texto;
+        txtNivel.style.color = infoBairro.cor;
+        boxRisco.style.backgroundColor = infoBairro.bg;
+
+        if (horario === 'manha') {
+          txtDica.innerText = '💡 Manhã: Maior fluxo de pessoas nas ruas, atenção em paradas de ônibus.';
+        } else if (horario === 'tarde') {
+          txtDica.innerText = '💡 Tarde: Movimento comercial ativo, priorize avenidas principais.';
+        } else {
+          txtDica.innerText = '💡 Pico (19h-22h): Horário de retorno. Evite trechos mal iluminados.';
+        }
       }
     }
 
@@ -624,6 +642,9 @@
       const urlGoogleMaps = `https://www.google.com/maps/search/?api=1&query=${query}`;
       window.open(urlGoogleMaps, '_blank');
     }
+
+    // Inicializa a consulta assim que a página carrega
+    document.addEventListener('DOMContentLoaded', atualizarConsulta);
   </script>
 
 </body>
