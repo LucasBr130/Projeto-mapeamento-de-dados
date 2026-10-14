@@ -619,18 +619,18 @@
         txtNivel.innerText = 'Crítico (Madrugada)';
         txtNivel.style.color = '#a61e1e';
         boxRisco.style.backgroundColor = '#fdf0f4';
-        txtDica.innerText = '💡 Madrugada: Circulação reduzida. Evite deslocamentos a pé sozinhas.';
+        txtDica.innerText = '-> Madrugada: Circulação reduzida. Evite deslocamentos a pé sozinhas.';
       } else {
         txtNivel.innerText = infoBairro.texto;
         txtNivel.style.color = infoBairro.cor;
         boxRisco.style.backgroundColor = infoBairro.bg;
 
         if (horario === 'manha') {
-          txtDica.innerText = '💡 Manhã: Maior fluxo de pessoas nas ruas, atenção em paradas de ônibus.';
+          txtDica.innerText = '-> Manhã: Maior fluxo de pessoas nas ruas, atenção em paradas de ônibus.';
         } else if (horario === 'tarde') {
-          txtDica.innerText = '💡 Tarde: Movimento comercial ativo, priorize avenidas principais.';
+          txtDica.innerText = '-> Tarde: Movimento comercial ativo, priorize avenidas principais.';
         } else {
-          txtDica.innerText = '💡 Pico (19h-22h): Horário de retorno. Evite trechos mal iluminados.';
+          txtDica.innerText = '-> Pico (19h-22h): Horário de retorno. Evite trechos mal iluminados.';
         }
       }
     }
