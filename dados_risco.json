@@ -1,44 +1,302 @@
 {
-    "Guamá": {
-        "texto": "Alto",
-        "cor": "#c92a2a",
-        "bg": "#fdf0f4",
-        "faixa_horario": "18h00 - 23h59",
-        "tipo_registro": "Violência Física e Intrafamiliar"
+    "Marco / São Brás, Belém": {
+        "pico": {
+            "bairro": "Marco / São Brás",
+            "municipio": "Belém",
+            "texto": "Médio",
+            "cor": "#d97706",
+            "bg": "#fef3c7",
+            "na_faixa_de_pico": false,
+            "faixa_pico": "08h00 - 17h59",
+            "tipo_registro": "Ações de Medida Protetiva de Urgência",
+            "volume": 6180,
+            "fonte": "DataJud"
+        },
+        "madrugada": {
+            "bairro": "Marco / São Brás",
+            "municipio": "Belém",
+            "texto": "Médio",
+            "cor": "#d97706",
+            "bg": "#fef3c7",
+            "na_faixa_de_pico": false,
+            "faixa_pico": "08h00 - 17h59",
+            "tipo_registro": "Ações de Medida Protetiva de Urgência",
+            "volume": 6180,
+            "fonte": "DataJud"
+        },
+        "manha": {
+            "bairro": "Marco / São Brás",
+            "municipio": "Belém",
+            "texto": "Alto",
+            "cor": "#c92a2a",
+            "bg": "#fdf0f4",
+            "na_faixa_de_pico": true,
+            "faixa_pico": "08h00 - 17h59",
+            "tipo_registro": "Ações de Medida Protetiva de Urgência",
+            "volume": 6180,
+            "fonte": "DataJud"
+        },
+        "tarde": {
+            "bairro": "Marco / São Brás",
+            "municipio": "Belém",
+            "texto": "Alto",
+            "cor": "#c92a2a",
+            "bg": "#fdf0f4",
+            "na_faixa_de_pico": true,
+            "faixa_pico": "08h00 - 17h59",
+            "tipo_registro": "Ações de Medida Protetiva de Urgência",
+            "volume": 6180,
+            "fonte": "DataJud"
+        }
     },
-    "Bengui": {
-        "texto": "Baixo",
-        "cor": "#10b981",
-        "bg": "#d1fae5",
-        "faixa_horario": "00h00 - 05h59",
-        "tipo_registro": "Violência Sexual"
+    "Guamá, Belém": {
+        "pico": {
+            "bairro": "Guamá",
+            "municipio": "Belém",
+            "texto": "Alto",
+            "cor": "#c92a2a",
+            "bg": "#fdf0f4",
+            "na_faixa_de_pico": true,
+            "faixa_pico": "18h00 - 23h59",
+            "tipo_registro": "Violência Física e Intrafamiliar",
+            "volume": 4250,
+            "fonte": "SINAN"
+        },
+        "madrugada": {
+            "bairro": "Guamá",
+            "municipio": "Belém",
+            "texto": "Médio",
+            "cor": "#d97706",
+            "bg": "#fef3c7",
+            "na_faixa_de_pico": false,
+            "faixa_pico": "18h00 - 23h59",
+            "tipo_registro": "Violência Física e Intrafamiliar",
+            "volume": 4250,
+            "fonte": "SINAN"
+        },
+        "manha": {
+            "bairro": "Guamá",
+            "municipio": "Belém",
+            "texto": "Médio",
+            "cor": "#d97706",
+            "bg": "#fef3c7",
+            "na_faixa_de_pico": false,
+            "faixa_pico": "18h00 - 23h59",
+            "tipo_registro": "Violência Física e Intrafamiliar",
+            "volume": 4250,
+            "fonte": "SINAN"
+        },
+        "tarde": {
+            "bairro": "Guamá",
+            "municipio": "Belém",
+            "texto": "Médio",
+            "cor": "#d97706",
+            "bg": "#fef3c7",
+            "na_faixa_de_pico": false,
+            "faixa_pico": "18h00 - 23h59",
+            "tipo_registro": "Violência Física e Intrafamiliar",
+            "volume": 4250,
+            "fonte": "SINAN"
+        }
     },
-    "Cabanagem": {
-        "texto": "Médio",
-        "cor": "#d97706",
-        "bg": "#fef3c7",
-        "faixa_horario": "20h00 - 02h00",
-        "tipo_registro": "Feminicídio e Lesão Corporal"
+    "Cabanagem, Belém": {
+        "pico": {
+            "bairro": "Cabanagem",
+            "municipio": "Belém",
+            "texto": "Médio",
+            "cor": "#d97706",
+            "bg": "#fef3c7",
+            "na_faixa_de_pico": true,
+            "faixa_pico": "20h00 - 02h00",
+            "tipo_registro": "Feminicídio e Lesão Corporal",
+            "volume": 3800,
+            "fonte": "Sinesp"
+        },
+        "madrugada": {
+            "bairro": "Cabanagem",
+            "municipio": "Belém",
+            "texto": "Médio",
+            "cor": "#d97706",
+            "bg": "#fef3c7",
+            "na_faixa_de_pico": true,
+            "faixa_pico": "20h00 - 02h00",
+            "tipo_registro": "Feminicídio e Lesão Corporal",
+            "volume": 3800,
+            "fonte": "Sinesp"
+        },
+        "manha": {
+            "bairro": "Cabanagem",
+            "municipio": "Belém",
+            "texto": "Baixo",
+            "cor": "#10b981",
+            "bg": "#d1fae5",
+            "na_faixa_de_pico": false,
+            "faixa_pico": "20h00 - 02h00",
+            "tipo_registro": "Feminicídio e Lesão Corporal",
+            "volume": 3800,
+            "fonte": "Sinesp"
+        },
+        "tarde": {
+            "bairro": "Cabanagem",
+            "municipio": "Belém",
+            "texto": "Baixo",
+            "cor": "#10b981",
+            "bg": "#d1fae5",
+            "na_faixa_de_pico": false,
+            "faixa_pico": "20h00 - 02h00",
+            "tipo_registro": "Feminicídio e Lesão Corporal",
+            "volume": 3800,
+            "fonte": "Sinesp"
+        }
     },
-    "Campina / Comercio": {
-        "texto": "Baixo",
-        "cor": "#10b981",
-        "bg": "#d1fae5",
-        "faixa_horario": "12h00 - 17h59",
-        "tipo_registro": "Ameaça e Importunação"
+    "Bengui, Belém": {
+        "pico": {
+            "bairro": "Bengui",
+            "municipio": "Belém",
+            "texto": "Baixo",
+            "cor": "#10b981",
+            "bg": "#d1fae5",
+            "na_faixa_de_pico": false,
+            "faixa_pico": "00h00 - 05h59",
+            "tipo_registro": "Violência Sexual",
+            "volume": 2410,
+            "fonte": "SINAN"
+        },
+        "madrugada": {
+            "bairro": "Bengui",
+            "municipio": "Belém",
+            "texto": "Baixo",
+            "cor": "#10b981",
+            "bg": "#d1fae5",
+            "na_faixa_de_pico": true,
+            "faixa_pico": "00h00 - 05h59",
+            "tipo_registro": "Violência Sexual",
+            "volume": 2410,
+            "fonte": "SINAN"
+        },
+        "manha": {
+            "bairro": "Bengui",
+            "municipio": "Belém",
+            "texto": "Baixo",
+            "cor": "#10b981",
+            "bg": "#d1fae5",
+            "na_faixa_de_pico": false,
+            "faixa_pico": "00h00 - 05h59",
+            "tipo_registro": "Violência Sexual",
+            "volume": 2410,
+            "fonte": "SINAN"
+        },
+        "tarde": {
+            "bairro": "Bengui",
+            "municipio": "Belém",
+            "texto": "Baixo",
+            "cor": "#10b981",
+            "bg": "#d1fae5",
+            "na_faixa_de_pico": false,
+            "faixa_pico": "00h00 - 05h59",
+            "tipo_registro": "Violência Sexual",
+            "volume": 2410,
+            "fonte": "SINAN"
+        }
     },
-    "Marco / São Brás": {
-        "texto": "Alto",
-        "cor": "#c92a2a",
-        "bg": "#fdf0f4",
-        "faixa_horario": "08h00 - 17h59",
-        "tipo_registro": "Ações de Medida Protetiva de Urgência"
+    "Campina / Comercio, Belém": {
+        "pico": {
+            "bairro": "Campina / Comercio",
+            "municipio": "Belém",
+            "texto": "Baixo",
+            "cor": "#10b981",
+            "bg": "#d1fae5",
+            "na_faixa_de_pico": false,
+            "faixa_pico": "12h00 - 17h59",
+            "tipo_registro": "Ameaça e Importunação",
+            "volume": 2230,
+            "fonte": "Sinesp"
+        },
+        "madrugada": {
+            "bairro": "Campina / Comercio",
+            "municipio": "Belém",
+            "texto": "Baixo",
+            "cor": "#10b981",
+            "bg": "#d1fae5",
+            "na_faixa_de_pico": false,
+            "faixa_pico": "12h00 - 17h59",
+            "tipo_registro": "Ameaça e Importunação",
+            "volume": 2230,
+            "fonte": "Sinesp"
+        },
+        "manha": {
+            "bairro": "Campina / Comercio",
+            "municipio": "Belém",
+            "texto": "Baixo",
+            "cor": "#10b981",
+            "bg": "#d1fae5",
+            "na_faixa_de_pico": false,
+            "faixa_pico": "12h00 - 17h59",
+            "tipo_registro": "Ameaça e Importunação",
+            "volume": 2230,
+            "fonte": "Sinesp"
+        },
+        "tarde": {
+            "bairro": "Campina / Comercio",
+            "municipio": "Belém",
+            "texto": "Baixo",
+            "cor": "#10b981",
+            "bg": "#d1fae5",
+            "na_faixa_de_pico": true,
+            "faixa_pico": "12h00 - 17h59",
+            "tipo_registro": "Ameaça e Importunação",
+            "volume": 2230,
+            "fonte": "Sinesp"
+        }
     },
-    "Terra Firme (Montese)": {
-        "texto": "Baixo",
-        "cor": "#10b981",
-        "bg": "#d1fae5",
-        "faixa_horario": "22h00 - 05h59",
-        "tipo_registro": "Óbitos por Agressão (CID-10 X85-Y09)"
+    "Terra Firme (Montese), Belém": {
+        "pico": {
+            "bairro": "Terra Firme (Montese)",
+            "municipio": "Belém",
+            "texto": "Baixo",
+            "cor": "#10b981",
+            "bg": "#d1fae5",
+            "na_faixa_de_pico": false,
+            "faixa_pico": "22h00 - 05h59",
+            "tipo_registro": "Óbitos por Agressão (CID-10 X85-Y09)",
+            "volume": 534,
+            "fonte": "SIM"
+        },
+        "madrugada": {
+            "bairro": "Terra Firme (Montese)",
+            "municipio": "Belém",
+            "texto": "Baixo",
+            "cor": "#10b981",
+            "bg": "#d1fae5",
+            "na_faixa_de_pico": true,
+            "faixa_pico": "22h00 - 05h59",
+            "tipo_registro": "Óbitos por Agressão (CID-10 X85-Y09)",
+            "volume": 534,
+            "fonte": "SIM"
+        },
+        "manha": {
+            "bairro": "Terra Firme (Montese)",
+            "municipio": "Belém",
+            "texto": "Baixo",
+            "cor": "#10b981",
+            "bg": "#d1fae5",
+            "na_faixa_de_pico": false,
+            "faixa_pico": "22h00 - 05h59",
+            "tipo_registro": "Óbitos por Agressão (CID-10 X85-Y09)",
+            "volume": 534,
+            "fonte": "SIM"
+        },
+        "tarde": {
+            "bairro": "Terra Firme (Montese)",
+            "municipio": "Belém",
+            "texto": "Baixo",
+            "cor": "#10b981",
+            "bg": "#d1fae5",
+            "na_faixa_de_pico": false,
+            "faixa_pico": "22h00 - 05h59",
+            "tipo_registro": "Óbitos por Agressão (CID-10 X85-Y09)",
+            "volume": 534,
+            "fonte": "SIM"
+        }
     }
 }

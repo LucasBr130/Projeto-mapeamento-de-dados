@@ -1,7 +1,7 @@
 fonte_dados,tipo_registro,local_ocorrencia,perfil_bairro,bairro_belem,municipio,lat,lon,faixa_horario,percentual_estimado,volume_amostral,bairro
-SINAN,Violência Física e Intrafamiliar,Residência,Periférico / Vulnerável,Guamá,Belém,-1.4705,-48.4725,18h00 - 23h59,42.5,4250,Guamá
-SINAN,Violência Sexual,Residência,Periférico / Urbano,Bengui,Belém,-1.3785,-48.45,00h00 - 05h59,24.1,2410,Bengui
-Sinesp,Feminicídio e Lesão Corporal,Domicílio,Periférico / Suburbano,Cabanagem,Belém,-1.368,-48.428,20h00 - 02h00,38.0,3800,Cabanagem
-Sinesp,Ameaça e Importunação,Via Pública,Central / Comercial,Campina / Comercio,Belém,-1.452,-48.499,12h00 - 17h59,22.3,2230,Campina / Comercio
 DataJud,Ações de Medida Protetiva de Urgência,Ambiente Judiciário,Urbano Geral,Marco / São Brás,Belém,-1.432,-48.46,08h00 - 17h59,61.8,6180,Marco / São Brás
+SINAN,Violência Física e Intrafamiliar,Residência,Periférico / Vulnerável,Guamá,Belém,-1.4705,-48.4725,18h00 - 23h59,42.5,4250,Guamá
+Sinesp,Feminicídio e Lesão Corporal,Domicílio,Periférico / Suburbano,Cabanagem,Belém,-1.368,-48.428,20h00 - 02h00,38.0,3800,Cabanagem
+SINAN,Violência Sexual,Residência,Periférico / Urbano,Bengui,Belém,-1.3785,-48.45,00h00 - 05h59,24.1,2410,Bengui
+Sinesp,Ameaça e Importunação,Via Pública,Central / Comercial,Campina / Comercio,Belém,-1.452,-48.499,12h00 - 17h59,22.3,2230,Campina / Comercio
 SIM,Óbitos por Agressão (CID-10 X85-Y09),Domicílio / Hospital,Periférico,Terra Firme (Montese),Belém,-1.458,-48.457,22h00 - 05h59,53.4,534,Terra Firme (Montese)
