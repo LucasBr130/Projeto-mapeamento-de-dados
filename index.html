@@ -481,6 +481,11 @@
           <option value="tarde">12h às 18h (Tarde)</option>
         </select>
       </div>
+      <div class="form-group" id="grupo-ano" style="display: none;">
+        <label for="select-ano">Ano dos registros</label>
+        <select id="select-ano" onchange="mudarAno()">
+        </select>
+      </div>
       <div class="risk-indicator">
         <div class="risk-label">Nível de Atenção Estimado</div>
         <div class="risk-value" id="txt-nivel">Alta</div>
@@ -683,6 +688,8 @@
         ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     }
 
+    const ANO_NAO_INFORMADO = 'Não informado';
+
     async function carregarDados() {
       try {
         const resp = await fetch('dados_risco.json');
@@ -696,6 +703,36 @@
         return;
       }
       preencherSelect();
+      preencherAnos();
+      desenharBairros();
+      atualizarConsulta();
+    }
+
+    function anoSelecionado() {
+      return document.getElementById('select-ano').value;
+    }
+
+    function anosDisponiveis() {
+      const anos = new Set();
+      Object.values(dadosRisco).forEach(porAno => Object.keys(porAno).forEach(a => anos.add(a)));
+      //Mais recente primeiro; "Não informado" por último
+      return [...anos].sort((a, b) => {
+        if (a === ANO_NAO_INFORMADO) return 1;
+        if (b === ANO_NAO_INFORMADO) return -1;
+        return Number(b) - Number(a);
+      });
+    }
+
+    function preencherAnos() {
+      const anos = anosDisponiveis();
+      document.getElementById('select-ano').innerHTML =
+        anos.map(a => `<option value="${esc(a)}">${esc(a)}</option>`).join('');
+      //O filtro só aparece quando os dados trazem pelo menos um ano real
+      const temAnoReal = anos.some(a => a !== ANO_NAO_INFORMADO);
+      document.getElementById('grupo-ano').style.display = temAnoReal ? '' : 'none';
+    }
+
+    function mudarAno() {
       desenharBairros();
       atualizarConsulta();
     }
@@ -703,9 +740,9 @@
     function preencherSelect() {
       const sel = document.getElementById('select-bairro');
       const porMunicipio = {};
-      Object.entries(dadosRisco).forEach(([chave, per]) => {
-        const m = per.pico.municipio;
-        (porMunicipio[m] ||= []).push({ chave, bairro: per.pico.bairro });
+      Object.entries(dadosRisco).forEach(([chave, porAno]) => {
+        const ref = Object.values(porAno)[0].pico;   // bairro e município são iguais em todos os anos
+        (porMunicipio[ref.municipio] ||= []).push({ chave, bairro: ref.bairro });
       });
       sel.innerHTML = Object.keys(porMunicipio)
         .sort((a, b) => a.localeCompare(b, 'pt-BR'))
@@ -717,18 +754,21 @@
     }
 
     function desenharBairros() {
+      const ano = anoSelecionado();
       const lista = Object.entries(dadosRisco)
-        .map(([chave, per]) => ({ chave, ...per.pico }))
+        .filter(([chave, porAno]) => porAno[ano])
+        .map(([chave, porAno]) => ({ chave, ...porAno[ano].pico }))
         .sort((a, b) => a.bairro.localeCompare(b.bairro, 'pt-BR'));
 
       document.getElementById('chart-bairros').innerHTML = `
         <table class="tabela-bairros">
           <thead>
-            <tr><th>Bairro</th><th>Tipo de registro nos dados</th><th>Fonte</th><th class="num">Volume estimado (amostra)</th></tr>
+            <tr><th>Bairro</th><th>Ano</th><th>Tipo de registro nos dados</th><th>Fonte</th><th class="num">Volume estimado (amostra)</th></tr>
           </thead>
           <tbody>${lista.map(b => `
             <tr>
               <td>${esc(b.bairro)} (${esc(b.municipio)})</td>
+              <td>${esc(b.ano)}</td>
               <td>${esc(b.tipo_registro)}</td>
               <td>${esc(b.fonte)}</td>
               <td class="num">${b.volume.toLocaleString('pt-BR')}</td>
@@ -740,33 +780,35 @@
     function atualizarConsulta() {
       const bairro = document.getElementById('select-bairro').value;
       const horario = document.getElementById('select-horario').value;
+      const ano = anoSelecionado();
       const txtNivel = document.getElementById('txt-nivel');
       const txtDica = document.getElementById('txt-dica');
       const boxRisco = document.querySelector('.risk-indicator');
 
-      const info = dadosRisco[bairro]?.[horario];
+      const info = dadosRisco[bairro]?.[ano]?.[horario];
       if (!info) {
         txtNivel.innerText = 'Sem dados';
         txtNivel.style.color = '#666';
-        txtDica.innerText = 'Ainda não há registros suficientes para este bairro e horário.';
+        txtDica.innerText = 'Ainda não há registros suficientes para este bairro, horário e ano.';
         return;
       }
       txtNivel.innerText = info.texto;
       txtNivel.style.color = info.cor;
       boxRisco.style.backgroundColor = info.bg;
-      txtDica.innerText = `${DICAS[horario]} Tipo de registro nos dados: ${info.tipo_registro}.`;
+      const textoAno = info.ano !== ANO_NAO_INFORMADO ? ` Ano dos registros: ${info.ano}.` : '';
+      txtDica.innerText = `${DICAS[horario]} Tipo de registro nos dados: ${info.tipo_registro}.${textoAno}`;
     }
 
     function abrirMapaSelecionado(event) {
       event.preventDefault();
       const bairroSelecionado = document.getElementById('select-bairro').value;
-      // A chave já vem como "Bairro, Município"
+      //A chave já vem como "Bairro, Município"
       const query = encodeURIComponent(bairroSelecionado + ', Pará, Brasil');
       const urlGoogleMaps = `https://www.google.com/maps/search/?api=1&query=${query}`;
       window.open(urlGoogleMaps, '_blank');
     }
 
-    // Inicializa a página assim que ela carrega
+    //Inicializa a página assim que ela carrega
     document.addEventListener('DOMContentLoaded', carregarDados);
   </script>
 

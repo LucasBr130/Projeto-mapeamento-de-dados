@@ -7,8 +7,10 @@ CAMINHO_BRUTO = 'data/raw/dados_brutos_belem.csv'
 CAMINHO_CSV = 'data/processed/dados_limpos.csv'
 CAMINHO_JSON = 'dados_risco.json'
 
-# Fontes que não são registros de ocorrência (ex.: pesquisas de percepção)
-# e por isso não entram no cálculo de risco. Ajuste conforme sua base.
+#Texto usado quando o CSV não traz o ano do registro
+ANO_NAO_INFORMADO = 'Não informado'
+
+#Fontes que não são registros de ocorrência (ex.: pesquisas de percepção) e por isso não entram no cálculo de risco. Ajuste conforme sua base.
 FONTES_IGNORADAS = {'DataSenado'}
 
 # Períodos do select do site (cobrem as 24h)
@@ -59,20 +61,27 @@ print("--- Processando base de dados ---")
 
 df = pd.read_csv(CAMINHO_BRUTO)
 
-# Aceita a coluna nova 'bairro' ou a antiga 'bairro_belem'
+#Aceita a coluna nova 'bairro' ou a antiga 'bairro_belem'
 if 'bairro' not in df.columns:
     df['bairro'] = df['bairro_belem']
 
-# 'Ananindeua (RMB)' -> 'Ananindeua'
+#'Ananindeua (RMB)' -> 'Ananindeua'
 df['municipio'] = df['municipio'].astype(str).str.replace(r'\s*\(.*\)\s*$', '', regex=True).str.strip()
+
+#Ano do registro: coluna opcional 'ano'. Sem ela (ou com célula vazia), o registro fica como "Não informado" e o filtro de ano não aparece no site.
+if 'ano' in df.columns:
+    anos = pd.to_numeric(df['ano'], errors='coerce')
+    df['ano'] = anos.map(lambda a: str(int(a)) if pd.notna(a) else ANO_NAO_INFORMADO)
+else:
+    df['ano'] = ANO_NAO_INFORMADO
 
 df_limpo = df.dropna(subset=['bairro', 'municipio']).copy()
 if 'fonte_dados' in df_limpo.columns:
     df_limpo = df_limpo[~df_limpo['fonte_dados'].isin(FONTES_IGNORADAS)]
 
-# Uma linha por bairro+município (fica a de maior volume)
+#Uma linha por bairro+município+ano (fica a de maior volume)
 df_limpo = (df_limpo.sort_values('volume_amostral', ascending=False)
-                    .drop_duplicates(['bairro', 'municipio']))
+                    .drop_duplicates(['bairro', 'municipio', 'ano']))
 
 os.makedirs('data/processed', exist_ok=True)
 df_limpo.to_csv(CAMINHO_CSV, index=False)
@@ -85,10 +94,10 @@ for _, row in df_limpo.iterrows():
     tipo = row.get('tipo_registro', 'Ocorrência geral')
     chave = f"{row['bairro']}, {row['municipio']}"
 
-    matriz_risco[chave] = {}
+    por_ano = matriz_risco.setdefault(chave, {}).setdefault(row['ano'], {})
     for periodo, horas_periodo in PERIODOS.items():
         if horas_faixa is None:
-            # Sem faixa horária na base: não há como variar, mantém o nível base
+            #Sem faixa horária na base: não há como variar, mantém o nível base
             nivel, na_faixa = base, None
         else:
             cobertura = len(horas_faixa & set(horas_periodo)) / len(horas_periodo)
@@ -96,9 +105,10 @@ for _, row in df_limpo.iterrows():
             nivel = base if na_faixa else max(base - 1, 0)
 
         texto, cor, bg = NIVEIS[nivel]
-        matriz_risco[chave][periodo] = {
+        por_ano[periodo] = {
             "bairro": row['bairro'],
             "municipio": row['municipio'],
+            "ano": row['ano'],
             "texto": texto,
             "cor": cor,
             "bg": bg,
@@ -112,4 +122,5 @@ for _, row in df_limpo.iterrows():
 with open(CAMINHO_JSON, 'w', encoding='utf-8') as f:
     json.dump(matriz_risco, f, ensure_ascii=False, indent=4)
 
-print(f"{len(matriz_risco)} bairros gravados em dados_risco.json")
+anos_gravados = sorted({a for por_ano in matriz_risco.values() for a in por_ano})
+print(f"{len(matriz_risco)} bairros gravados em dados_risco.json (anos: {', '.join(anos_gravados)})")
