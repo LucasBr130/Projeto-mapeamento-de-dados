@@ -483,7 +483,7 @@
       </div>
       <div class="form-group" id="grupo-ano" style="display: none;">
         <label for="select-ano">Ano dos registros</label>
-        <select id="select-ano" onchange="mudarAno()">
+        <select id="select-ano" onchange="mudarAno(this.value)">
         </select>
       </div>
       <div class="risk-indicator">
@@ -561,6 +561,12 @@
     <h2>Registros por bairro</h2>
     <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Valores estimados e a fonte de cada dado. Cada bairro aparece com um único tipo de registro, o que consta nos dados do projeto: isso não significa que outros tipos de violência não ocorram ali. Fontes diferentes medem coisas diferentes, por isso os números não devem ser comparados diretamente entre bairros.</p>
 
+    <div class="form-group" id="grupo-ano-tabela" style="display: none; max-width: 240px;">
+      <label for="select-ano-tabela">Ano dos registros</label>
+      <select id="select-ano-tabela" onchange="mudarAno(this.value)">
+      </select>
+    </div>
+
     <div class="chart-container" id="chart-bairros" style="overflow-x: auto;"></div>
   </section>
 
@@ -585,7 +591,7 @@
           <li><strong>Médio:</strong> de 2.500 a 3.999 registros.</li>
           <li><strong>Baixo:</strong> menos de 2.500 registros.</li>
         </ul>
-        <p style="margin-top: 0.5rem;">O nível é relativo ao que consta nos dados do projeto, e não uma medida absoluta de risco.</p>
+        <p style="margin-top: 0.5rem;">O nível é relativo ao que consta nos dados do projeto, e não uma medida absoluta de risco. Ele é calculado separadamente para cada ano.</p>
       </div>
 
       <div class="metodo-card">
@@ -638,23 +644,8 @@
     <p style="color: var(--text-muted); font-size: 0.9rem;">Conte-nos se as informações estão claras e se o site ajuda no seu planejamento de segurança.</p>
 
     <div class="feedback-card">
-      <div class="form-group">
-        <label>As informações estão claras?</label>
-        <select>
-          <option>Muito clara</option>
-          <option>Mais ou menos</option>
-          <option>Nada clara</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>O site é fácil de usar?</label>
-        <select>
-          <option>Fácil</option>
-          <option>Normal</option>
-          <option>Difícil</option>
-        </select>
-      </div>
-      <button class="btn-primary" style="width: 100%; border-radius: 8px;">Enviar Avaliação</button>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.2rem;">O formulário leva de 2 a 3 minutos. As respostas são anônimas e usadas apenas para fins acadêmicos e de melhoria do projeto.</p>
+      <a class="btn-primary" style="width: 100%; border-radius: 8px;" href="https://forms.gle/U4kLMBJwuywydxi78" target="_blank" rel="noopener noreferrer">Responder ao formulário de avaliação</a>
     </div>
   </section>
 
@@ -715,7 +706,7 @@
     function anosDisponiveis() {
       const anos = new Set();
       Object.values(dadosRisco).forEach(porAno => Object.keys(porAno).forEach(a => anos.add(a)));
-      //Mais recente primeiro; "Não informado" por último
+      // Mais recente primeiro; "Não informado" por último
       return [...anos].sort((a, b) => {
         if (a === ANO_NAO_INFORMADO) return 1;
         if (b === ANO_NAO_INFORMADO) return -1;
@@ -725,14 +716,21 @@
 
     function preencherAnos() {
       const anos = anosDisponiveis();
-      document.getElementById('select-ano').innerHTML =
-        anos.map(a => `<option value="${esc(a)}">${esc(a)}</option>`).join('');
-      //O filtro só aparece quando os dados trazem pelo menos um ano real
+      const opcoes = anos.map(a => `<option value="${esc(a)}">${esc(a)}</option>`).join('');
+      document.getElementById('select-ano').innerHTML = opcoes;
+      document.getElementById('select-ano-tabela').innerHTML = opcoes;
+      // Os filtros só aparecem quando os dados trazem pelo menos um ano real
       const temAnoReal = anos.some(a => a !== ANO_NAO_INFORMADO);
       document.getElementById('grupo-ano').style.display = temAnoReal ? '' : 'none';
+      document.getElementById('grupo-ano-tabela').style.display = temAnoReal ? '' : 'none';
     }
 
-    function mudarAno() {
+    // Os dois filtros de ano (consulta e tabela) ficam sempre iguais
+    function mudarAno(valor) {
+      if (valor !== undefined) {
+        document.getElementById('select-ano').value = valor;
+        document.getElementById('select-ano-tabela').value = valor;
+      }
       desenharBairros();
       atualizarConsulta();
     }
@@ -802,13 +800,13 @@
     function abrirMapaSelecionado(event) {
       event.preventDefault();
       const bairroSelecionado = document.getElementById('select-bairro').value;
-      //A chave já vem como "Bairro, Município"
+      // A chave já vem como "Bairro, Município"
       const query = encodeURIComponent(bairroSelecionado + ', Pará, Brasil');
       const urlGoogleMaps = `https://www.google.com/maps/search/?api=1&query=${query}`;
       window.open(urlGoogleMaps, '_blank');
     }
 
-    //Inicializa a página assim que ela carrega
+    // Inicializa a página assim que ela carrega
     document.addEventListener('DOMContentLoaded', carregarDados);
   </script>
 
